@@ -1,3 +1,1 @@
-🛍️ Loja de Roupa Online
-
-melhorando o seu estilo com preço beixo!
+Uma lista de afazeres simples e básica criada para organizar tarefas do dia dia.
