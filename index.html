@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Catálogo de Roupas</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Minha Lista de Afazeres</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Catálogo de Roupas</h1>
-
-  <div class="tabs">
-    <button onclick="mostrarAba('vendidos')">Mais Vendidos</button>
-    <button onclick="mostrarAba('baratos')">Mais Baratos</button>
-    <button onclick="mostrarAba('estilosos')">Mais Estilosos</button>
-  </div>
-
-  <div id="catalogo" class="catalogo"></div>
-
+  <h1>Lista de Afazeres</h1>
+  <input id="tarefa" type="text" placeholder="Digite uma tarefa">
+  <button onclick="adicionarTarefa()">Adicionar</button>
+  <ul id="lista"></ul>
   <script src="script.js"></script>
 </body>
 </html>
+
