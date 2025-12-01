@@ -13,10 +13,15 @@ Permitir evolução do projeto com novos recursos.
 🧩 Recursos Principais
 
 ✔️ Adicionar nova tarefa
+
 ✔️ Listar tarefas existentes
+
 ✔️ Marcar tarefa como concluída
+
 ✔️ Excluir tarefa individualmente
+
 ✔️ Interface minimalista e responsiva
+
 ✔️ Filtrar tarefas (todas / concluídas / pendentes) (opcional)
 
 📝 Como Usar a Aplicação
@@ -27,4 +32,6 @@ Clique em Adicionar.
 A tarefa aparecerá na lista.
 Utilize os botões de:
 ✔️ Concluir
+
 🗑 Excluir
+
