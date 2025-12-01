@@ -31,6 +31,7 @@ No campo indicado, escreva uma nova tarefa.
 Clique em Adicionar.
 A tarefa aparecerá na lista.
 Utilize os botões de:
+
 ✔️ Concluir
 
 🗑 Excluir
