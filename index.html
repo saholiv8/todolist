@@ -6,11 +6,11 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      display: flex;
-      gap: 50px;
+      margin: 0;
+      padding: 20px;
     }
-    section {
-      width: 45%;
+    h1 {
+      margin-bottom: 10px;
     }
     ul {
       list-style: none;
@@ -28,25 +28,55 @@
       text-decoration: line-through;
       color: gray;
     }
+    li.concluida::before {
+      content: "✅ ";
+      color: green;
+      font-weight: bold;
+    }
     button {
       margin-left: 10px;
+    }
+    /* Lixeira fixa no canto */
+    #lixeiraBox {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 250px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: #fff;
+      border: 2px solid #ccc;
+      padding: 10px;
+      display: none; /* começa escondida */
+    }
+    #toggleLixeira {
+      position: fixed;
+      top: 20px;
+      right: 280px;
+      background: #ff4444;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <!-- Lista principal -->
-  <section>
-    <h1>Minhas Tarefas</h1>
-    <input id="novaTarefa" type="text" placeholder="Digite uma tarefa">
-    <button onclick="adicionarTarefa()">Adicionar</button>
-    <ul id="lista"></ul>
-  </section>
+  <h1>Minhas Tarefas</h1>
+  <input id="novaTarefa" type="text" placeholder="Digite uma tarefa">
+  <button onclick="adicionarTarefa()">Adicionar</button>
 
-  <!-- Lixeira -->
-  <section>
-    <h1>Lixeira</h1>
+  <ul id="lista"></ul>
+
+  <!-- Botão para abrir/fechar lixeira -->
+  <button id="toggleLixeira" onclick="toggleLixeira()">🗑️ Lixeira</button>
+
+  <!-- Caixa da lixeira -->
+  <div id="lixeiraBox">
+    <h2>Lixeira</h2>
     <ul id="lixeira"></ul>
-  </section>
+    <button onclick="esvaziarLixeira()">Esvaziar Lixeira</button>
+  </div>
 
   <script>
     function adicionarTarefa() {
@@ -101,6 +131,15 @@
 
       li.appendChild(btnRestaurar);
       document.getElementById("lixeira").appendChild(li);
+    }
+
+    function toggleLixeira() {
+      const box = document.getElementById("lixeiraBox");
+      box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
+    function esvaziarLixeira() {
+      document.getElementById("lixeira").innerHTML = "";
     }
   </script>
 </body>
