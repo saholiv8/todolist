@@ -1,27 +1,101 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #f4f4f4;
+/* Estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-input {
-  padding: 8px;
-  margin: 5px;
+body {
+    background-color: #e0f7fa; /* Azul claro de fundo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+h1 {
+    text-align: center;
+    color: #00bcd4;
+    margin-bottom: 20px;
+}
+
+/* Área de input e botão */
+.input-area {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid #b2ebf2;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
 }
 
 button {
-  padding: 8px 12px;
-  cursor: pointer;
+    padding: 10px 15px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+button:hover {
+    background-color: #0097a7;
 }
 
-li {
-  background: #fff;
-  margin: 5px;
-  padding: 10px;
-  border-radius: 5px;
+/* Lista de tarefas */
+#taskList {
+    list-style: none;
+}
+
+#taskList li {
+    background-color: #f0f7f7;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #00bcd4;
+    transition: background-color 0.3s;
+}
+
+/* Tarefa concluída (estilo aplicado por JS) */
+#taskList li.completed {
+    text-decoration: line-through;
+    color: #757575;
+    background-color: #e0e0e0;
+    border-left: 5px solid #757575;
+}
+
+/* Botão de remover */
+.remove-btn {
+    background-color: #ff5252;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 12px;
+}
+
+.remove-btn:hover {
+    background-color: #d32f2f;
 }
