@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Minhas Tarefas 📋</h1>
-        
-        <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Adicione uma nova tarefa...">
-            <button onclick="addTask()">Adicionar</button>
-        </div>
-        
-        <ul id="taskList">
-            </ul>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      padding: 8px;
+      margin: 5px 0;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li.concluida {
+      text-decoration: line-through;
+      color: gray;
+    }
+    button {
+      margin-left
