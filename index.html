@@ -1,146 +1,152 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Lista de Tarefas com Lixeira</title>
+  <meta charset="UTF-8" />
+  <title>ToDo com Lixeira</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    h1 { margin-bottom: 10px; }
+    .row { display: flex; gap: 40px; align-items: flex-start; }
+
+    ul { list-style: none; padding: 0; }
+    li { 
+      padding: 8px; margin: 6px 0; background: #f7f7f7; 
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1px solid #e0e0e0; border-radius: 6px;
     }
-    h1 {
-      margin-bottom: 10px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      padding: 8px;
-      margin: 5px 0;
-      background: #f0f0f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    li.concluida {
-      text-decoration: line-through;
-      color: gray;
-    }
-    li.concluida::before {
-      content: "✅ ";
-      color: green;
-      font-weight: bold;
-    }
-    button {
-      margin-left: 10px;
-    }
+    .texto { flex: 1; }
+    .concluida .texto { text-decoration: line-through; color: #777; }
+    .concluida .texto::before { content: "✅ "; color: green; font-weight: bold; }
+
+    .acoes button { margin-left: 8px; }
+
     /* Lixeira fixa no canto */
-    #lixeiraBox {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 250px;
-      max-height: 400px;
-      overflow-y: auto;
-      background: #fff;
-      border: 2px solid #ccc;
-      padding: 10px;
-      display: none; /* começa escondida */
-    }
     #toggleLixeira {
-      position: fixed;
-      top: 20px;
-      right: 280px;
-      background: #ff4444;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
+      position: fixed; top: 20px; right: 20px;
+      background: #ff5a5a; color: #fff; border: none; padding: 10px 12px; border-radius: 6px; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
+    #lixeiraBox {
+      position: fixed; top: 70px; right: 20px; width: 280px; max-height: 60vh; overflow-y: auto;
+      background: #fff; border: 2px solid #ddd; border-radius: 8px; padding: 12px; display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    #lixeiraBox h2 { margin: 0 0 10px 0; }
+    #lixeiraBox .footer { display: flex; justify-content: flex-end; margin-top: 10px; }
+    #lixeiraBox .footer button { background: #777; color: #fff; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
   </style>
 </head>
 <body>
   <h1>Minhas Tarefas</h1>
-  <input id="novaTarefa" type="text" placeholder="Digite uma tarefa">
-  <button onclick="adicionarTarefa()">Adicionar</button>
-
-  <ul id="lista"></ul>
+  <div class="row">
+    <div style="flex:1">
+      <input id="novaTarefa" type="text" placeholder="Digite uma tarefa" />
+      <button id="addBtn">Adicionar</button>
+      <ul id="lista"></ul>
+    </div>
+  </div>
 
   <!-- Botão para abrir/fechar lixeira -->
-  <button id="toggleLixeira" onclick="toggleLixeira()">🗑️ Lixeira</button>
+  <button id="toggleLixeira">🗑️ Lixeira</button>
 
   <!-- Caixa da lixeira -->
   <div id="lixeiraBox">
     <h2>Lixeira</h2>
     <ul id="lixeira"></ul>
-    <button onclick="esvaziarLixeira()">Esvaziar Lixeira</button>
+    <div class="footer">
+      <button id="esvaziarBtn">Esvaziar</button>
+    </div>
   </div>
 
   <script>
-    function adicionarTarefa() {
-      const input = document.getElementById("novaTarefa");
-      const texto = input.value.trim();
-      if (texto === "") return;
+    // Garantir que o script rode após o HTML estar pronto
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('novaTarefa');
+      const addBtn = document.getElementById('addBtn');
+      const lista = document.getElementById('lista');
+      const lixeira = document.getElementById('lixeira');
+      const toggleBtn = document.getElementById('toggleLixeira');
+      const lixeiraBox = document.getElementById('lixeiraBox');
+      const esvaziarBtn = document.getElementById('esvaziarBtn');
 
-      const li = criarItem(texto);
-      document.getElementById("lista").appendChild(li);
-      input.value = "";
-    }
+      addBtn.addEventListener('click', () => {
+        const texto = input.value.trim();
+        if (!texto) return;
+        lista.appendChild(criarItemLista(texto));
+        input.value = '';
+        input.focus();
+      });
 
-    function criarItem(texto) {
-      const li = document.createElement("li");
-      li.textContent = texto;
+      toggleBtn.addEventListener('click', () => {
+        lixeiraBox.style.display = (lixeiraBox.style.display === 'none' || lixeiraBox.style.display === '') ? 'block' : 'none';
+      });
 
-      // Botão concluir
-      const btnConcluir = document.createElement("button");
-      btnConcluir.textContent = "✔️ Concluir";
-      btnConcluir.onclick = () => {
-        li.classList.toggle("concluida");
-        btnConcluir.textContent = li.classList.contains("concluida") ? "↩️ Desmarcar" : "✔️ Concluir";
-      };
+      esvaziarBtn.addEventListener('click', () => {
+        lixeira.innerHTML = '';
+      });
 
-      // Botão excluir (vai para lixeira)
-      const btnExcluir = document.createElement("button");
-      btnExcluir.textContent = "🗑️ Excluir";
-      btnExcluir.onclick = () => {
-        moverParaLixeira(li, texto);
-      };
+      function criarItemLista(texto) {
+        const li = document.createElement('li');
 
-      li.appendChild(btnConcluir);
-      li.appendChild(btnExcluir);
+        const span = document.createElement('span');
+        span.className = 'texto';
+        span.textContent = texto;
 
-      return li;
-    }
+        const acoes = document.createElement('div');
+        acoes.className = 'acoes';
 
-    function moverParaLixeira(item, texto) {
-      item.remove(); // remove da lista principal
+        const btnConcluir = document.createElement('button');
+        btnConcluir.textContent = '✔️ Concluir';
+        btnConcluir.addEventListener('click', () => {
+          li.classList.toggle('concluida');
+          btnConcluir.textContent = li.classList.contains('concluida') ? '↩️ Desmarcar' : '✔️ Concluir';
+        });
 
-      const li = document.createElement("li");
-      li.textContent = texto;
+        const btnExcluir = document.createElement('button');
+        btnExcluir.textContent = '🗑️ Excluir';
+        btnExcluir.addEventListener('click', () => {
+          moverParaLixeira(li, texto);
+        });
 
-      // Botão restaurar
-      const btnRestaurar = document.createElement("button");
-      btnRestaurar.textContent = "♻️ Restaurar";
-      btnRestaurar.onclick = () => {
-        li.remove();
-        const restaurado = criarItem(texto);
-        document.getElementById("lista").appendChild(restaurado);
-      };
+        acoes.appendChild(btnConcluir);
+        acoes.appendChild(btnExcluir);
+        li.appendChild(span);
+        li.appendChild(acoes);
+        return li;
+      }
 
-      li.appendChild(btnRestaurar);
-      document.getElementById("lixeira").appendChild(li);
-    }
+      function moverParaLixeira(item, texto) {
+        item.remove(); // remove da lista principal
 
-    function toggleLixeira() {
-      const box = document.getElementById("lixeiraBox");
-      box.style.display = box.style.display === "none" ? "block" : "none";
-    }
+        const li = document.createElement('li');
 
-    function esvaziarLixeira() {
-      document.getElementById("lixeira").innerHTML = "";
-    }
+        const span = document.createElement('span');
+        span.className = 'texto';
+        span.textContent = texto;
+
+        const acoes = document.createElement('div');
+        acoes.className = 'acoes';
+
+        const btnRestaurar = document.createElement('button');
+        btnRestaurar.textContent = '♻️ Restaurar';
+        btnRestaurar.addEventListener('click', () => {
+          li.remove();
+          lista.appendChild(criarItemLista(texto));
+        });
+
+        const btnApagar = document.createElement('button');
+        btnApagar.textContent = '❌ Apagar';
+        btnApagar.addEventListener('click', () => {
+          li.remove(); // apaga definitivamente da lixeira
+        });
+
+        acoes.appendChild(btnRestaurar);
+        acoes.appendChild(btnApagar);
+        li.appendChild(span);
+        li.appendChild(acoes);
+        lixeira.appendChild(li);
+      }
+    });
   </script>
 </body>
 </html>
