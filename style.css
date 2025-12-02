@@ -1,3 +1,4 @@
+/* Estilo geral da página */
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f9;
@@ -5,6 +6,7 @@ body {
   padding: 20px;
 }
 
+/* Caixa central */
 .container {
   max-width: 600px;
   margin: auto;
@@ -14,10 +16,12 @@ body {
   box-shadow: 0 0 10px #ccc;
 }
 
+/* Títulos */
 h1, h2 {
   text-align: center;
 }
 
+/* Área de input e botão */
 .input-area {
   display: flex;
   justify-content: center;
@@ -41,11 +45,13 @@ h1, h2 {
   cursor: pointer;
 }
 
+/* Listas */
 ul {
   list-style: none;
   padding: 0;
 }
 
+/* Cada item da lista */
 li {
   background: #eee;
   margin: 5px 0;
@@ -56,11 +62,13 @@ li {
   align-items: center;
 }
 
+/* Estilo para tarefas concluídas */
 li.completed {
   text-decoration: line-through;
   background: #d4edda;
 }
 
+/* Botões de ação */
 button.action {
   margin-left: 5px;
   padding: 5px 10px;
@@ -69,9 +77,9 @@ button.action {
   cursor: pointer;
 }
 
+/* Cores específicas para cada ação */
 button.complete { background: #007bff; color: white; }
 button.edit { background: #ffc107; color: black; }
 button.delete { background: #dc3545; color: white; }
 button.restore { background: #17a2b8; color: white; }
 button.permanent { background: #6c757d; color: white; }
-
