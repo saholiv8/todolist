@@ -20,19 +20,27 @@ Permitir evolução do projeto com novos recursos.
 
 ✔️ Excluir tarefa individualmente
 
-✔️ Interface minimalista e responsiva
-
-✔️ Filtrar tarefas (todas / concluídas / pendentes) (opcional)
+✔️ Filtrar tarefas (excluir,editar e concluido)
 
 📝 Como Usar a Aplicação
 
 Abra a página inicial.
+
 No campo indicado, escreva uma nova tarefa.
+
 Clique em Adicionar.
+
 A tarefa aparecerá na lista.
+
 Utilize os botões de:
 
 ✔️ Concluir
 
 🗑 Excluir
+
+✏️ Editar
+
+♻️ Restaurar (na lixeira)
+
+❌ Excluir definitivamente (na lixeira)
 
